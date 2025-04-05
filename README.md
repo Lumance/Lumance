@@ -16,7 +16,7 @@ Features:
 
 
 Future Add Ons:
-1. Provide feedback option to take user feedback and improve model.
+- Provide feedback option to take user feedback and improve model.
 
 
 ---
