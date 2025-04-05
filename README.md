@@ -7,14 +7,13 @@ Welcome to Cashablanca! This is your personal finance assistant that helps you m
 # 📖 How to use:
 - **Login** : Use forget password if you can't remember or signup if you don't have an account
 - **Upload Your Data** : To get started, upload your transaction data. It should include information like App, Category, and Amount for each transaction. You can upload a CSV file with this data to the platform.
-- **Adjust Your Budget** : You can view your total WANTS and NEEDS, along with a detailed breakdown of how much you're spending in each subcategory. The platform will give you clear visuals showing where your money is going and based on the insights you can adjust your budget, set new financial goals, or simply keep track of your spending habits.
+- **Adjust Your Budget** : You can view your total WANTS and NEEDS, adjust your budget, set new financial goals, or simply keep track of your spending habits.
 
 ---
 
 # ⭐ Features:
 - **Automatic Transaction Classification** : Cashablanca automatically sorts your expenses into WANTS and NEEDS based on transaction data like category and amount.
 - **AI Chatbot** : Helps users classify transactions, track budgets, set goals, and provides personalized insights and reminders for real-time finance management.
-- **Smart Budgeting** : With easy-to-understand visuals and insights, Cashablanca helps you see your spending patterns and make better budgeting choices.
 
 
 ---
@@ -31,12 +30,12 @@ Welcome to Cashablanca! This is your personal finance assistant that helps you m
 - **Frontend:** Vite + React (Hosted on Vercel)
 - **Backend:** FastAPI / Flask (Hosted on Railway)
 - **Database:** MongoDB Atlas
-- **AI Integration:** Python Neural Network Models
+- **AI Integration:** Python Classification
 - **API Testing:** Postman
 
 ---
 
-## 🌐 Live Links
+## 🌐 Live Links:
 
 - **Frontend:** [vercel-link](https://your-project.vercel.app)
 - **Backend API:** [railway-link](https://your-api.up.railway.app)
@@ -44,11 +43,12 @@ Welcome to Cashablanca! This is your personal finance assistant that helps you m
 
 ---
 
-Contributors: 
+# 👥 Contributors: 
 - Harshvardhan Gaggar  | its-harsh-here
 - Shivansh Dubey       | ShivanshDubeyONG
 - Saumil Agarwal       | HappyMeal-git
 - Abhishek Ghosh       | FirezTheGreat
+- Suryansh Singh       |  
 
 ---
 
