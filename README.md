@@ -44,16 +44,16 @@ Welcome to Cashablanca! This is your personal finance assistant that helps you m
 ---
 
 # 👥 Contributors: 
-- Harshvardhan Gaggar  | its-harsh-here
-- Shivansh Dubey       | ShivanshDubeyONG
-- Saumil Agarwal       | HappyMeal-git
-- Abhishek Ghosh       | FirezTheGreat
-- Suryansh Singh       |  
+- **Harshvardhan Gaggar**  | its-harsh-here
+- **Shivansh Dubey**       | ShivanshDubeyONG
+- **Saumil Agarwal**       | HappyMeal-git
+- **Abhishek Ghosh**       | FirezTheGreat
+- **Suryansh Singh**       |  
 
 ---
 
-Issues: If you encounter any bugs or have feature requests, please create an issue here.
+**Issues**: If you encounter any bugs or have feature requests, please create an issue here.
 
 ---
 
-License: This project is licensed under the MIT License - see the LICENSE.md file for details.
+**License**: This project is licensed under the MIT License - see the LICENSE.md file for details.
