@@ -14,15 +14,10 @@ Features:
 
 ---
 
-
 Future Add Ons:
 - Provide feedback option to take user feedback and improve model.
 
-
 ---
-
-
-
 
 ## 🛠️ Tech Stack
 
@@ -42,13 +37,13 @@ Future Add Ons:
 
 ---
 
-
 Contributors: 
 - Harshvardhan Gaggar  | its-harsh-here
 - Shivansh Dubey       | ShivanshDubeyONG
 - Saumil Agarwal       | HappyMeal-git
 - Abhishek Ghosh       | FirezTheGreat
 
+---
 
 Issues: If you encounter any bugs or have feature requests, please create an issue here.
 License: This project is licensed under the MIT License - see the LICENSE.md file for details.
