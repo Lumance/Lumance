@@ -1,7 +1,6 @@
 # 🚀 Cashablanca
 
-Summary: 
-A full-stack web app that leverages AI (Neural Networks) to [short description of what it does — e.g., analyze, predict, generate, recommend, etc.]
+Welcome to Cashablanca! This is your smart financial assistant designed to help you keep track of your spending in a meaningful way. With Cashablanca, you can easily classify your expenses into WANTS and NEEDS—giving you a clear picture of where your money is going and helping you make smarter financial decisions.
 
 ---
 
