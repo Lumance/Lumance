@@ -5,16 +5,24 @@ Welcome to Cashablanca! This is your smart financial assistant designed to help 
 ---
 
 How to use:
-- Login(Use forget password if you can't remember or signup if you don't have an account)
+- **Login** : Use forget password if you can't remember or signup if you don't have an account
+- **Upload Your Data** : To get started, upload your transaction data. It should include information like App, Category, and Amount for each transaction. You can upload a CSV file with this data to the platform.
+- **Automatic Classification** : Once your data is uploaded, Cashablanca will automatically classify each transaction as either a WANT or a NEED. Additionally, it will categorize them into subcategories like Groceries, Bills, Food, etc.
+- **Adjust Your Budget** : You can view your total WANTS and NEEDS, along with a detailed breakdown of how much you're spending in each subcategory. The platform will give you clear visuals showing where your money is going. Based on the insights Cashablanca provides, you can adjust your budget, set new financial goals, or simply keep track of your spending habits. With this data, you can make smarter choices and take control of your finances.
 
 ---
 
 Features:
+- **Automatic Transaction Classification** : Cashablanca automatically sorts your expenses into WANTS and NEEDS based on transaction data like category and amount.
+- **Subcategory Insights** : It also breaks down your spending into subcategories like Groceries, Bills, Health, and more. Know exactly where you’re spending!
+- **Smart Budgeting** : With easy-to-understand visuals and insights, Cashablanca helps you see your spending patterns and make better budgeting choices.
 
 ---
 
 Future Add Ons:
-- Provide feedback option to take user feedback and improve model.
+- **Expense Prediction**: Predict future spending based on your historical data to help plan ahead.
+- **Smart Alerts**: Set custom alerts for overspending in any category or when approaching your budget limits.
+- **Savings & Investment Tracking** : Track savings goals and get actionable insights for better financial decisions.
 
 ---
 
