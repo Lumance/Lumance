@@ -53,4 +53,7 @@ Welcome to Cashablanca! This is your personal finance assistant that helps you m
 ---
 
 Issues: If you encounter any bugs or have feature requests, please create an issue here.
+
+---
+
 License: This project is licensed under the MIT License - see the LICENSE.md file for details.
