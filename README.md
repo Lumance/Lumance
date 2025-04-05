@@ -1,4 +1,4 @@
-# 🚀 [Project Name] — Hackathon Submission
+# 🚀 Cashablanca
 
 Summary: 
 A full-stack web app that leverages AI (Neural Networks) to [short description of what it does — e.g., analyze, predict, generate, recommend, etc.]
