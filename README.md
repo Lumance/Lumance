@@ -8,14 +8,18 @@ A full-stack web app that leverages AI (Neural Networks) to [short description o
 How to use:
 - Login(Use forget password if you can't remember or signup if you don't have an account)
 
+---
 
 Features:
+
+---
 
 
 Future Add Ons:
 1. Provide feedback option to take user feedback and improve model.
 
 
+---
 
 
 
@@ -36,6 +40,7 @@ Future Add Ons:
 - **Backend API:** [railway-link](https://your-api.up.railway.app)
 - **GitHub Repo:** [github-link](https://github.com/your/repo)
 
+---
 
 
 Contributors: 
