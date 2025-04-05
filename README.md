@@ -1,6 +1,6 @@
 # 🚀 Cashablanca
 
-Welcome to Cashablanca! This is your smart financial assistant designed to help you keep track of your spending in a meaningful way. With Cashablanca, you can easily classify your expenses into WANTS and NEEDS—giving you a clear picture of where your money is going and helping you make smarter financial decisions.
+Welcome to Cashablanca! This is your personal finance assistant that helps you manage, categorize, and track your spending with ease. Whether you're looking to differentiate between essential needs and non-essential wants or dive deep into spending patterns. Cashablanca uses smart AI to provide you with valuable insights to take control of your finances. Let’s make managing money smarter, simpler, and more insightful!
 
 ---
 
