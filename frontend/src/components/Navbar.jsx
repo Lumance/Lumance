@@ -32,18 +32,37 @@ const Navbar = () => {
                 </div >
                 <ul className='hidden relative z-20 md:flex flex-col items-center justify-center m-auto md:flex-row md:py-5'>
                     {NAV_ITEMS.map(({ label, route }, index) => (
-                        <Link to={route}><li className="block relative font-poppins text-[1.25rem] leading-6 text-white transition-colors hover:text-light-purple
+                        <Link
+                            to={route}
+                            onClick={toggleDrawer}
+                            key={index}
+                        >
+                            <li className="block relative font-poppins text-[1.25rem] leading-6 text-white transition-colors hover:text-light-purple
                             font-semibold py-8 px-6 md:text-[14px] 
                             md:py-5 md:px-6 lg:px-8 lg:text-[20px] 
                             xl:px-14 xl:text-[24px] 2xl:px-[66px] 2xl:text-[19px]
                             3xl:px-20 3xl:text-[16px]
-                            xxl:px-24 xxl:text-[20px]"
-                            key={index}>{label}</li></Link>
+                            xxl:px-24 xxl:text-[20px]">
+                                {label}
+                            </li>
+                        </Link>
                     ))}
                 </ul>
                 <div className='hidden md:flex justify-between items-center text-white font-semibold gap-x-10 md:gap-x-5 max-md:text-[12px]'>
-                    <Link className='transition-colors hover:text-black hover:bg-white/80 hover:border-0 py-3 px-3 rounded-md duration-300' to={'/login'}>Log In</Link>
-                    <Link className='transition-colors hover:text-black bg-gradient-to-r from-violet-800 to-violet-950 py-2 px-3 rounded-md duration-300' to={'/signup'}>Sign Up</Link>
+                    <Link
+                        className='transition-colors hover:text-black hover:bg-white/80 hover:border-0 py-3 px-3 rounded-md duration-300'
+                        to={'/login'}
+                        onClick={toggleDrawer}
+                    >
+                        Log In
+                    </Link>
+                    <Link
+                        className='transition-colors hover:text-black bg-gradient-to-r from-violet-800 to-violet-950 py-2 px-3 rounded-md duration-300'
+                        to={'/register'}
+                        onClick={toggleDrawer}
+                    >
+                        Sign Up
+                    </Link>
                 </div>
                 <div className='md:hidden flex flex-col justify-end'>
                     <button onClick={toggleDrawer}>
@@ -56,17 +75,32 @@ const Navbar = () => {
                     <div className="fixed right-0 z-20 bg-neutral-900 w-full p-12 flex flex-col justify-center items-center lg:hidden">
                         <ul>
                             {NAV_ITEMS.map(({ label, route }, index) => (
-                                <Link to={route}>
+                                <Link
+                                    to={route}
+                                    key={index}
+                                    onClick={toggleDrawer}>
                                     <li className="block relative font-poppins text-[18px] leading-6 text-white transition-colors hover:text-light-purple
                             font-semibold py-5 px-8"
-                                        key={index}>{label}
+                                    >{label}
                                     </li>
                                 </Link>
                             ))}
                         </ul>
                         <div className='flex space-x-6 pt-6 text-white font-semibold items-center'>
-                            <Link className='transition-colors hover:text-black hover:bg-white/80 hover:border-0 py-3 px-3 rounded-md duration-300' to={'/login'}>Log In</Link>
-                            <Link className='transition-colors hover:text-black bg-gradient-to-r from-violet-800 to-violet-950 py-2 px-3 rounded-md duration-300' to={'/signup'}>Sign Up</Link>
+                            <Link
+                                className='transition-colors hover:text-black hover:bg-white/80 hover:border-0 py-3 px-3 rounded-md duration-300'
+                                to={'/login'}
+                                onClick={toggleDrawer}
+                            >
+                                Log In
+                            </Link>
+                            <Link
+                                className='transition-colors hover:text-black bg-gradient-to-r from-violet-800 to-violet-950 py-2 px-3 rounded-md duration-300'
+                                to={'/register'}
+                                onClick={toggleDrawer}
+                            >
+                                Sign Up
+                            </Link>
                         </div>
                     </div>
                 )}

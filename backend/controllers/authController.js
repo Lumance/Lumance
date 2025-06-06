@@ -1,130 +1,191 @@
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const User = require('../models/User');
-const { generateToken } = require('../utils/generateToken');
+import validator from 'validator';
+import { OAuth2Client } from 'google-auth-library';
+import User from '../models/User.js';
+import Otp from '../models/RegistrationOtp.js'
+import { generateToken } from '../middlewares/authMiddleware.js';
+import { sendOtpToEmail, verifyOtp } from '../utils/utils.js'
+
+
+const client = new OAuth2Client(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
+    'postmessage'
+);
 
 // Signup route - Creates a new user account with email/password
-const signUp = async (req, res) => {
-    const { email, password, name } = req.body;
+const register = async (req, res) => {
+    const { name, email, password, otp } = req.body;
 
     try {
+        if (!name || !email || !password) return res.status(400).json({ error: 'All fields are required' });
+
+        if (!validator.isEmail(email)) return res.status(400).json({ error: 'Invalid email format' });
+
         const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).send('User already exists');
+        if (existingUser) return res.status(409).json({ success: false, error: 'User already exists' });
+
+        try {
+            await verifyOtp(email, otp);
+        } catch (error) {
+            console.error('OTP verification failed:', error.message);
+            return res.status(400).json({ success: false, error: error.message });
         }
 
-        // Validate email and password (optional)
-        if (!email.match(/\S+@\S+\.\S+/)) {
-            return res.status(400).send('Invalid email format');
-        }
-
-        const newUser = new User({
+        const newUser = await User.create({
+            name,
             email,
             password,
-            name,
-            isGoogleAuth: false, // Not a Google login
+            isGoogleAuth: false,
         });
-
-        await newUser.save();
 
         const token = generateToken(newUser.userId, '7d');
 
-        // Redirect to the dashboard with the token (could also be set as a cookie)
-        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
-        res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
-
-        res.json({ success: true });
+        res
+            .cookie('token', token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'Strict',
+                maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            })
+            .status(201)
+            .json({
+                success: true,
+                token
+            });
     } catch (error) {
         console.error('Error signing up', error);
-        res.status(500).send('Server error');
+        res.status(500).json({ success: false, error: 'Server error' });
     }
 };
 
-// Login route (email/password)
 const login = async (req, res) => {
     const { email, password } = req.body;
 
     try {
         const user = await User.findOne({ email });
 
-        if (!user) return res.status(400).send('Invalid credentials');
-        if (user.isGoogleAuth) return res.status(400).send('Please use Google login for this account');
-
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) return res.status(400).send('Invalid credentials');
+        if (user?.isGoogleAuth) return res.status(400).json({ error: 'Please use Google login for this account' });
+        if (!user || !(await user.comparePassword(password))) return res.status(400).json({ error: 'Invalid username or password.' });
 
         const token = generateToken(user.userId, '7d');
 
-        // Redirect to the dashboard
-        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
-        res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
-        res.json({ success: true });
+        res
+            .cookie('token', token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'Strict',
+                maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            })
+            .json({ success: true, user: { isOnboarded: user.isOnboarded } });
     } catch (error) {
         console.error('Error logging in', error);
-        res.status(500).send('Server error');
+        res.status(500).json({ success: false, error: 'Server error' });
     }
 };
 
-const googleCallback = async (req, res) => {
+const handleGoogleAuth = async (req, res) => {
     try {
-        const { emails, displayName: name } = req.user;
-        const [{ value: email }] = emails;
+        const { code } = req.body;
+
+        // Exchange code for tokens
+        const { tokens } = await client.getToken({
+            code,
+            redirect_uri: 'postmessage' // Special value for client-side flow
+        });
+
+        // Verify ID token
+        const ticket = await client.verifyIdToken({
+            idToken: tokens.id_token,
+            audience: process.env.GOOGLE_CLIENT_ID
+        });
+
+        const payload = ticket.getPayload();
+        const { email, name, picture } = payload;
 
         let user = await User.findOne({ email });
         if (!user) {
-            user = new User({
+            user = await User.create({
                 email,
                 name,
-                isGoogleAuth: true, // Mark as Google login
+                isGoogleAuth: true,
+                avatarUrl: picture
             });
+        } else {
+            if (!user.isGoogleAuth) user.isGoogleAuth = true;
+            if (!user.avatarUrl && picture) user.avatarUrl = picture;
 
             await user.save();
         }
 
         const token = generateToken(user.userId, '7d');
 
-        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
-        res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
-        res.redirect('http://localhost:5713')
+        res
+            .cookie('token', token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'Strict',
+                maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+            })
+            .json({ success: true, user: { email, name, avatarUrl: picture, isOnboarded: user.isOnboarded } });
     } catch (error) {
-        console.error('Error during Google login/signup', error);
-        res.status(500).send('Server error');
+        console.error('Google Auth Error: ', error.response?.data || error.message);
+
+        const statusCode = error.response?.status || 401;
+        res.status(statusCode).json({
+            error: 'Authentication failed',
+            details: error.response?.data?.error_description || error.message
+        });
     }
 };
 
-// Refresh token route
-const refreshToken = (req, res) => {
-    const refreshToken = req.cookies.refreshToken;
-    if (!refreshToken) return res.status(401).json({ message: 'Refresh token missing' });
-
-    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
-        if (err) return res.status(403).json({ message: 'Invalid refresh token' });
-
-        const newAccessToken = generateToken({ id: decoded.id }, '15m');
-        res.json({ accessToken: newAccessToken });
-    });
+const logout = (_req, res) => {
+    res
+        .clearCookie('token', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'Strict',
+        })
+        .json({ success: true }); // redirect to main page in frontend
 };
 
-const me = (req, res) => {
-    if (!req.user) {
-        return res.status(401).send('Unauthorized');
+const me = async (req, res) => {
+    try {
+        const { userId } = req.user;
+
+        const user = await User.findOne({ userId }).select('-password');
+        if (!user) return res.status(404).json({ message: 'User not found' });
+
+        res.status(200).json({ success: true, user });
+    } catch (error) {
+        console.error('Error fetching user:', error);
+        res.status(500).json({ success: false, error: 'Server error' });
     }
-    res.json(req.user);
 };
 
-// Logout route (clear refresh token)
-const logout = (req, res) => {
-    req.logout(() => {
-        res.clearCookie('token'); // Clear the token cookie on logout
-        res.json({ message: 'Logged out successfully' });
-    });
-};
+const sendOtp = async (req, res) => {
+    const { email } = req.body
 
-module.exports = {
-    signUp,
+    const existingUser = await User.findOne({ email });
+    if (existingUser) return res.status(409).json({ success: false, error: 'User already exists' });
+
+    const otpCode = Math.floor(100000 + Math.random() * 900000).toString()
+    const expiresAt = new Date(Date.now() + 2 * 60 * 1000) // 2 mins
+
+    await Otp.create({ email, otp: otpCode, expiresAt })
+
+    try {
+        await sendOtpToEmail(email, otpCode);
+        res.json({ success: true, message: 'OTP sent successfully' });
+    } catch (error) {
+        res.status(500).json({ success: false, error: 'Failed to send OTP' });
+    }
+}
+
+export {
+    register,
     login,
-    googleCallback,
-    refreshToken,
+    handleGoogleAuth,
     me,
-    logout
+    logout,
+    sendOtp
 };

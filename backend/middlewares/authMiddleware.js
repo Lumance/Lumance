@@ -1,17 +1,21 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
+
+const generateToken = (userId, expiresIn) => {
+  return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn });
+};
 
 const verifyAccessToken = (req, res, next) => {
-  const token = req.header('Authorization')?.replace('Bearer ', '');
-  if (!token) return res.status(401).json({ message: 'Access denied. No token provided.' });
+  const { token } = req.cookies;
+  if (!token) return res.status(401).json({ error: 'Access denied. Unauthorized.' });
 
-  jwt.verify(token, process.env.VITE_JWT_SECRET, (err, decoded) => {
-    if (err) return res.status(400).json({ message: 'Invalid token' });
+  try {
+    const user = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = user;
 
-    req.user = decoded;
     next();
-  });
+  } catch (error) {
+    res.status(403).json({ error: 'Invalid Token' });
+  }
 };
 
-module.exports = {
-  verifyAccessToken
-};
+export { generateToken, verifyAccessToken };

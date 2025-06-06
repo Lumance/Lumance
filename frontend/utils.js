@@ -1,13 +1,3 @@
-const API_BASE_URL = "https://api.themoviedb.org/3";
-
-const API_OPTIONS = {
-    method: 'GET',
-    headers: {
-        accept: 'application/json',
-        Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`
-    }
-}
-
 const NAV_ITEMS = [
     { label: 'Home', route: '/' },
     { label: 'Analytics', route: '/analytics' },
@@ -55,4 +45,4 @@ const QUESTIONS = [
     }
 ];
 
-export { API_BASE_URL, API_OPTIONS, NAV_ITEMS, QUESTIONS };
+export { NAV_ITEMS, QUESTIONS };

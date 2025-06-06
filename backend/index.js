@@ -1,58 +1,42 @@
-require('dotenv').config();
-const express = require('express');
-const passport = require('passport');
-const session = require('express-session');
-const { Strategy } = require('passport-google-oauth20');
-const jwt = require('jsonwebtoken');
-const cors = require('cors');
-const Mongoose = require('./mongoose');
-const authRoutes = require('./routes/authRoutes.js');  // Importing the auth routes
+import dotenv from 'dotenv';
+import express from 'express';
+import passport from 'passport';
+import { Strategy } from 'passport-google-oauth20';
+import jwt from 'jsonwebtoken';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
+import Mongoose from './mongoose.js';
+import authRoutes from './routes/authRoutes.js';
+
+dotenv.config();
 const app = express();
 
-app.use(cors({
-    origin: 'http://localhost:5173', // frontend URL
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
-    credentials: true, // if you want to allow cookies and credentials
-}));
-
-app.use(express.json());
-
-// MongoDB connection
 const mongoose = new Mongoose();
 mongoose.init();
 
-// Session management
-app.use(session({
-    secret: process.env.SESSION_SECRET || 'your-secret-key',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        secure: process.env.NODE_ENV === 'production', // Secure cookie in production
-        httpOnly: true,
-    },
+app.use(express.json());
+app.use(cookieParser())
+
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+    credentials: true
 }));
 
 app.use(passport.initialize());
-app.use(passport.session());
 
 // Passport Google OAuth Setup
 passport.use(new Strategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientID: process.env.GOOGLE_CLIENT_ID, // try to destructure all the env variables from process.env above
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: `${process.env.API_URL}/auth/google/callback`,
+    callbackURL: `${process.env.BACKEND_URL}/auth/google/callback`,
 }, (accessToken, refreshToken, profile, done) => {
     return done(null, profile);
 }));
 
-passport.serializeUser((user, done) => done(null, user));
-passport.deserializeUser((user, done) => done(null, user));
+app.use('/api/auth', authRoutes);
 
-// Auth Routes
-
-app.use('/auth', authRoutes);
-
-// Start server
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+app.listen(process.env.PORT, () => {
+    console.log(`Server is running on port ${process.env.PORT}`);
 });

@@ -1,15 +1,17 @@
-require('dotenv').config();
-let { connect, Promise, connection } = require("mongoose");
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+
+let { connect, Promise, connection } = mongoose;
+
+dotenv.config();
 
 /**
  * @class Catalyst Mongoose
  */
-
-module.exports = class CatalystMongoose {
+export default class CatalystMongoose {
     /**
      * Initiates Mongoose Client
      */
-
     init() {
         const dbOptions = {
             autoIndex: false,
@@ -32,4 +34,4 @@ module.exports = class CatalystMongoose {
             console.warn('Connection Disconnected!');
         });
     }
-};
+}

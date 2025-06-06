@@ -1,18 +1,17 @@
-const express = require('express');
-const { login, refreshToken, googleCallback, logout, signUp, me } = require('../controllers/authController');
-const { verifyAccessToken } = require('../middlewares/authMiddleware');
-const passport = require('passport');
+import { Router } from 'express';
+import { login, handleGoogleAuth, logout, register, me, sendOtp } from '../controllers/authController.js';
+import { verifyAccessToken } from '../middlewares/authMiddleware.js';
 
-const router = express.Router();
+const router = Router();
 
 router.post('/login', login);
-router.post('/signup', signUp)
-router.get('/google', passport.authenticate('google', {
-    scope: ['profile', 'email'],
-}));
-router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/' }), googleCallback);
-router.post('/refresh', refreshToken);
-router.post('/logout', verifyAccessToken, logout);
-router.get('/me', me);
+router.post('/signup', register);
 
-module.exports = router;
+router.post('/send-otp', sendOtp)
+
+router.post('/google', handleGoogleAuth);
+
+router.get('/me', verifyAccessToken, me);
+router.post('/logout', logout);
+
+export default router;
