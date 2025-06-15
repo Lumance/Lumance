@@ -3,8 +3,7 @@ import { OAuth2Client } from 'google-auth-library';
 import User from '../models/User.js';
 import Otp from '../models/RegistrationOtp.js'
 import { generateToken } from '../middlewares/authMiddleware.js';
-import { sendOtpToEmail, verifyOtp } from '../utils/utils.js'
-
+import { sendOtpToEmail, verifyOtp } from '../utils/utils.js';
 
 const client = new OAuth2Client(
     process.env.GOOGLE_CLIENT_ID,
@@ -87,13 +86,11 @@ const handleGoogleAuth = async (req, res) => {
     try {
         const { code } = req.body;
 
-        // Exchange code for tokens
         const { tokens } = await client.getToken({
             code,
-            redirect_uri: 'postmessage' // Special value for client-side flow
+            redirect_uri: 'postmessage'
         });
 
-        // Verify ID token
         const ticket = await client.verifyIdToken({
             idToken: tokens.id_token,
             audience: process.env.GOOGLE_CLIENT_ID
@@ -139,13 +136,17 @@ const handleGoogleAuth = async (req, res) => {
 };
 
 const logout = (_req, res) => {
-    res
-        .clearCookie('token', {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'Strict',
-        })
-        .json({ success: true }); // redirect to main page in frontend
+    try {
+        res
+            .clearCookie('token', {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'Strict',
+            })
+            .status(200).json({ success: true });
+    } catch (error) {
+    res.status(500).json({ error: 'Logout failed' });
+    }
 };
 
 const me = async (req, res) => {
