@@ -52,7 +52,7 @@ Welcome to Lumance! This is your personal finance assistant that helps you manag
 
 ---
 
-**Issues**: If you encounter any bugs or have feature requests, please create an issue here.
+**Issues**: If you encounter any bugs or have any feature requests, please create an issue here.
 
 ---
 
