@@ -55,7 +55,7 @@ const userSchema = new Schema({
   avatarUrl: { type: String, default: '' }, // create a default user avatar in files or google avatar if available
 
   preferences: {
-    theme: { type: String, default: 'light' },
+    theme: { type: String, default: 'dark' },
     currency: { type: String, default: 'INR' },
     language: { type: String, default: 'en' }
   },

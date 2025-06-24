@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Button from './Button'
 import { EyeIcon, EyeOffIcon } from 'lucide-react'
 import { useGoogleLogin } from '@react-oauth/google'
-import { UseAuth } from '../contexts/AuthContext'
+import { useAuth } from '../contexts/AuthContext'
 import Google from '../assets/svg/Google'
 
 const LoginForm = () => {
@@ -14,7 +14,7 @@ const LoginForm = () => {
 
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState('')
-    const { refreshUser } = UseAuth() // Assuming you have a function to refresh user state
+    const { refreshUser } = useAuth() // Assuming you have a function to refresh user state
 
     useEffect(() => {
         const timer = setTimeout(() => {

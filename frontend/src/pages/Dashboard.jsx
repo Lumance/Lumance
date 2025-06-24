@@ -1,7 +1,7 @@
-import { UseAuth } from '../contexts/AuthContext'
+import { useAuth } from '../contexts/AuthContext'
 
 const Dashboard = () => {
-  const { user, setUser, isLoggedIn, setIsLoggedIn } = UseAuth();
+  const { user, setUser, isLoggedIn, setIsLoggedIn } = useAuth();
 
   const logIn = (e) => {
     e.preventDefault();

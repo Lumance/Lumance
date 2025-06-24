@@ -1,10 +1,9 @@
-import { useState } from 'react';
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
 import { createHead, UnheadProvider } from '@unhead/react/client';
-import { AnimatePresence } from 'motion/react';
 
 import RootLayout from './layouts/RootLayout';
-import { UseAuth } from './contexts/AuthContext';
+import { LoadingProvider } from './contexts/LoadingContext';
+
 import Home from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import SignUp from './pages/SignUp';
@@ -15,15 +14,12 @@ import OnboardingPage from './pages/OnboardingPage';
 import Dashboard from './pages/Dashboard';
 
 import NotFound from './components/NotFound';
-import LoadingScreen from './components/LoadingScreen';
 
 import ProtectedRoute from './routes/ProtectedRoute';
 import PublicRoute from "./routes/PublicRoute";
+import { AuthProvider } from './contexts/AuthContext';
 
 const App = () => {
-  const { isAuthLoading } = UseAuth();
-  const [isVisualLoadingDone, setIsVisualLoadingDone] = useState(false)
-
   const head = createHead();
 
   const router = createBrowserRouter(
@@ -51,14 +47,11 @@ const App = () => {
 
   return (
     <UnheadProvider head={head}>
-      <div className="relative">
-        <RouterProvider router={router} />
-        <AnimatePresence mode="wait">
-          {(isAuthLoading || !isVisualLoadingDone) && (
-            <LoadingScreen key="loader" onComplete={() => setIsVisualLoadingDone(true)} />
-          )}
-        </AnimatePresence>
-      </div>
+      <LoadingProvider>
+        <AuthProvider>
+          <RouterProvider router={router} />
+        </AuthProvider>
+      </LoadingProvider>
     </UnheadProvider>
   );
 

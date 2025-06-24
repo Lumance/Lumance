@@ -7,8 +7,8 @@ const SignUp = () => {
   return (
     <>
       <SEOHead
-        title="Sign Up - Cashablanca"
-        description="Create your Cashablanca account to manage your finances, track expenses, and achieve your financial goals with ease."
+        title={`Sign Up - ${import.meta.env.VITE_WEBSITE_NAME}`}
+        description={`Create your ${import.meta.env.VITE_WEBSITE_NAME} account to manage your finances, track expenses, and achieve your financial goals with ease.`}
         url="register"
       />
       <div className='min-h-screen w-full animated-ocean-background overflow-hidden relative'>
@@ -33,14 +33,14 @@ const SignUp = () => {
           <div className="w-full lg:w-11/20 min-h-screen flex flex-col px-4 sm:px-6 lg:px-8">
             <header className="py-8 self-center">
               <Link to='/' className="text-3xl font-semibold text-white">
-                Cashablanca
+                {import.meta.env.VITE_WEBSITE_NAME}
               </Link>
             </header>
             <main className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full">
               <div className="space-y-4 mb-8 text-center">
                 <h2 className="text-4xl font-bold text-white whitespace-nowrap">
                   {/* <span className="font-normal">Hello, </span> */}
-                  <span className="font-bold text-[#E5E5E5]">Welcome to Cashablanca!</span>
+                  <span className="font-bold text-[#E5E5E5]">Welcome to {import.meta.env.VITE_WEBSITE_NAME}!</span>
                 </h2>
                 <p className="text-[#E5E5E5]">
                   Take charge of your finances — sign up and start your journey today.

@@ -42,8 +42,8 @@ const OnboardingPage = () => {
     return (
         <>
             <SEOHead
-                title="Onboarding - Cashablanca"
-                description="Complete your onboarding to start using Cashablanca. Answer a few questions to personalize your experience."
+                title={`Onboarding - ${import.meta.env.VITE_WEBSITE_NAME}`}
+                description={`Complete your onboarding to start using ${import.meta.env.VITE_WEBSITE_NAME}. Answer a few questions to personalize your experience.`}
                 url="onboarding"
             />
             <div className="min-h-screen min-w-full bg-[#0E0C15] text-white">

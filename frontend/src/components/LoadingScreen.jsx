@@ -1,7 +1,7 @@
 import { AnimatePresence, motion, useMotionValue, useTransform } from 'motion/react';
 import { useEffect, useState } from 'react';
 
-const letters = 'LUMANCE'.split('');
+const letters = import.meta.env.VITE_WEBSITE_NAME.toUpperCase().split('');
 
 export default function LoadingScreen({ onComplete }) {
     const progress = useMotionValue(0);
@@ -21,7 +21,7 @@ export default function LoadingScreen({ onComplete }) {
 
                     setTimeout(() => {
                         onComplete?.();
-                    }, 550); //600
+                    }, 800); //600
                 }, 550); //500
             }
         }, 15);
@@ -31,13 +31,11 @@ export default function LoadingScreen({ onComplete }) {
     return (
         <motion.div
             className="fixed inset-0 z-50 cursor-none flex flex-col items-center justify-center bg-dotted bg-black text-white"
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: { duration: 0.4, ease: [0.645, 0.045, 0.355, 1], delay: 0.3 } }}
+            exit={{ opacity: 0, transition: { duration: 1, ease: [0.645, 0.045, 0.355, 1], delay: 0.3 } }}
         >
             {/* Animated Letters */}
-            <div className="flex mb-6 space-x-1">
-                <AnimatePresence mode='popLayout'>
+            <div className="flex flex-col items-center justify-center">
+                <AnimatePresence>
                     {showLetters && (
                         <motion.div
                             key="word"
@@ -45,13 +43,14 @@ export default function LoadingScreen({ onComplete }) {
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{
                                 scale: 1.07,
-                                opacity: 0,
+                                opacity: 0.1,
                             }}
                             transition={{
-                                duration: 1,
+                                type: 'tween',
+                                duration: 0.8,
                                 ease: [0.645, 0.045, 0.355, 1],
                             }}
-                            className="flex space-x-1"
+                            className="flex space-x-1 mb-4"
                         >
                             {letters.map((letter, i) => (
                                 <motion.span
@@ -67,18 +66,23 @@ export default function LoadingScreen({ onComplete }) {
                         </motion.div>
                     )}
                 </AnimatePresence>
-            </div>
 
-            {/* Progress Bar */}
-            <div className={`${!showLetters ? 'hidden' : ''} w-48 h-1.5 bg-white/10 rounded-full overflow-hidden`}>
+                {/* Keep bar outside AnimatePresence so it stays stable */}
                 <motion.div
-                    className="h-full rounded-full"
-                    style={{
-                        width: barWidth,
-                        background: 'linear-gradient(to right, #B2F5EA, #81E6D9)',
-                        boxShadow: '0 0 6px #81E6D9, 0 0 12px #B2F5EA',
-                    }}
-                />
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: showLetters ? 1 : 0 }}
+                    transition={{ duration: 0.1, ease: 'easeOut' }}
+                    className="w-48 h-1.5 bg-white/10 rounded-full overflow-hidden"
+                >
+                    <motion.div
+                        className="h-full rounded-full"
+                        style={{
+                            width: barWidth,
+                            background: 'linear-gradient(to right, #B2F5EA, #81E6D9)',
+                            boxShadow: '0 0 6px #81E6D9, 0 0 12px #B2F5EA',
+                        }}
+                    />
+                </motion.div>
             </div>
         </motion.div >
     );

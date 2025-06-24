@@ -7,8 +7,8 @@ const LoginPage = () => {
     return (
         <>
             <SEOHead
-                title="Login - Cashablanca"
-                description="Log in to your Cashablanca account to manage your finances, track expenses, and achieve your financial goals with ease."
+                title={`Login - ${import.meta.env.VITE_WEBSITE_NAME}`}
+                description={`Log in to your ${import.meta.env.VITE_WEBSITE_NAME} account to manage your finances, track expenses, and achieve your financial goals with ease.`}
                 url="login"
             />
             <div className="min-h-screen w-full animated-background overflow-hidden relative">
@@ -23,7 +23,7 @@ const LoginPage = () => {
                     <div className="w-full lg:w-11/20 min-h-screen flex flex-col px-4 sm:px-6 lg:px-8">
                         <header className="py-8">
                             <Link to='/' className="text-3xl font-semibold text-white">
-                                Cashablanca
+                                {import.meta.env.VITE_WEBSITE_NAME}
                             </Link>
                         </header>
                         <main className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full">

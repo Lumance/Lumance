@@ -1,6 +1,6 @@
-# 🚀 Cashablanca
+# 🚀 Lumance
 
-Welcome to Cashablanca! This is your personal finance assistant that helps you manage, categorize, and track your spending with ease. Whether you're looking to differentiate between essential needs and non-essential wants or dive deep into spending patterns. Cashablanca uses smart AI to provide you with valuable insights to take control of your finances. Let’s make managing money smarter, simpler, and more insightful!
+Welcome to Lumance! This is your personal finance assistant that helps you manage, categorize, and track your spending with ease. Whether you're looking to differentiate between essential needs and non-essential wants or dive deep into spending patterns. Lumance uses smart AI to provide you with valuable insights to take control of your finances. Let’s make managing money smarter, simpler, and more insightful!
 
 ---
 
@@ -12,7 +12,7 @@ Welcome to Cashablanca! This is your personal finance assistant that helps you m
 ---
 
 # ⭐ Features:
-- **Automatic Transaction Classification** : Cashablanca automatically sorts your expenses into WANTS and NEEDS based on transaction data like category and amount.
+- **Automatic Transaction Classification** : Lumance automatically sorts your expenses into WANTS and NEEDS based on transaction data like category and amount.
 - **AI Chatbot** : Helps users classify transactions, track budgets, set goals, and provides personalized insights and reminders for real-time finance management.
 
 

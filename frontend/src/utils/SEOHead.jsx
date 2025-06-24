@@ -1,8 +1,8 @@
 import { Head } from '@unhead/react'
 
 const SEOHead = ({ title, description, url = '', image }) => {
-  const siteName = 'Cashablanca'
-  const defaultTitle = 'Cashablanca – Your AI-Powered Money Buddy'
+  const siteName = import.meta.env.VITE_WEBSITE_NAME
+  const defaultTitle = `${import.meta.env.VITE_WEBSITE_NAME} - Your AI-Powered Money Buddy`
   const defaultDescription =
     'Control your spending, grow your savings, and get personalized financial insights – all in one smart app.'
   const defaultImage = 'https://yourdomain.com/og-image.png' // Replace with your actual image
@@ -35,7 +35,7 @@ const SEOHead = ({ title, description, url = '', image }) => {
       <meta name="twitter:title" content={title || defaultTitle} />
       <meta name="twitter:description" content={description || defaultDescription} />
       <meta name="twitter:image" content={image || defaultImage} />
-      <meta name="twitter:site" content="@cashablanca" />
+      <meta name="twitter:site" content={`@${import.meta.env.VITE_WEBSITE_NAME.toLowerCase()}`} />
     </Head>
   )
 }

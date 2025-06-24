@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { UseAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 
 const ProtectedRoute = ({ children }) => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { user, loading } = UseAuth();
+    const { user, loading } = useAuth();
     const [shouldRender, setShouldRender] = useState(false);
 
     useEffect(() => {

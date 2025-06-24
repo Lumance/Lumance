@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UseAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 
 const PublicRoute = ({ children }) => {
-    const { user, loading } = UseAuth();
+    const { user, loading } = useAuth();
     const navigate = useNavigate();
     const [shouldRender, setShouldRender] = useState(false);
 

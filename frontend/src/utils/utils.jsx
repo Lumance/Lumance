@@ -1,8 +1,18 @@
+import { Bell, CreditCard, LayoutDashboard, Settings, UserRound } from "lucide-react";
+
 const NAV_ITEMS = [
     { label: 'Home', route: '/' },
     { label: 'Analytics', route: '/analytics' },
     { label: 'Pricing', route: '/pricing' },
     { label: 'About Us', route: '/about-us' }
+]
+
+const PROFILE_ITEMS = [
+    { label: 'Profile', route: '/account', icon: <UserRound /> },
+    { label: 'Settings', route: '/account/settings', icon: <Settings /> },
+    { label: 'Dashboard', route: '/dashboard', icon: <LayoutDashboard /> },
+    { label: 'Subscription', route: '/account/subscription', icon: <CreditCard /> },
+    { label: 'Notifications', route: '/account/notifications', icon: <Bell />}
 ]
 
 const QUESTIONS = [
@@ -45,4 +55,4 @@ const QUESTIONS = [
     }
 ];
 
-export { NAV_ITEMS, QUESTIONS };
+export { NAV_ITEMS, PROFILE_ITEMS, QUESTIONS };
