@@ -42,6 +42,7 @@
 
 @layer base {
   body {
+    background-color: var(--color-primary);
     font-family: 'Inter', sans-serif;
     font-synthesis: none;
     text-rendering: optimizeLegibility;

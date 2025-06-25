@@ -22,7 +22,7 @@ function LandingPage() {
         </AnimatePresence>
       )}
 
-      <div className="bg-primary text-white w-full">
+      <div className="text-white w-full">
         {/* Hero Section */}
         <section className="min-h-screen flex flex-col items-center justify-center px-4">
           <h1 className="text-4xl font-bold mb-4">💸 AI Finance Assistant</h1>
