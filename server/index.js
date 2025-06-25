@@ -10,12 +10,12 @@ import Mongoose from './mongoose.js';
 import authRoutes from './routes/authRoutes.js';
 
 dotenv.config({
-  path: path.resolve(
-    process.cwd(),
-    process.env.NODE_ENV === 'production'
-      ? '.env.production'
-      : '.env.development'
-  ),
+    path: path.resolve(
+        process.cwd(),
+        process.env.NODE_ENV === 'production'
+            ? '.env.production'
+            : '.env.development'
+    ),
 });
 
 const app = express();
