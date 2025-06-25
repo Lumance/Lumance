@@ -21,11 +21,11 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3
 
 # Install node modules
-COPY package-lock.json package.json ./
+COPY server/package-lock.json server/package.json ./
 RUN npm ci --omit=dev
 
 # Copy application code
-COPY . .
+COPY server/. ./
 
 
 # Final stage for app image
