@@ -1,4 +1,5 @@
 import { Outlet, useLocation } from 'react-router-dom';
+import { motion } from 'motion/react';
 import Navbar from '../components/Navbar';
 import { useLoading } from '../contexts/LoadingContext';
 import noiseBackground from '../assets/bg-noise.png'
@@ -11,24 +12,18 @@ const RootLayout = () => {
 
   return (
     <>
-      {!shouldHideNavbar && (
-        <>
-          <div
-            className="absolute inset-0 z-0 pointer-events-none"
-            style={{
-              backgroundImage: `url(${noiseBackground})`,
-              backgroundRepeat: 'repeat',
-              backgroundSize: '128px',
-              opacity: 0.04,
-              borderRadius: 0,
-              width: '100%',
-              height: '100%',
-            }}
-          />
-          
-          <Navbar />
-        </>
-      )}
+      <motion.div
+        className="fixed top-0 left-0 w-full h-screen z-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${noiseBackground})`,
+          backgroundRepeat: 'repeat',
+          backgroundSize: '128px',
+          opacity: 0.04,
+        }}
+      />
+
+      {!shouldHideNavbar && <Navbar />}
+
       <main>
         <Outlet />
       </main>

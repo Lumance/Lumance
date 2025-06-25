@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { AnimatePresence, motion, scale } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import { CircleUserRound, Menu, X, ChevronDown, LogOut, LogIn } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
