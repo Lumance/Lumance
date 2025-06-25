@@ -27,8 +27,8 @@ Welcome to Lumance! This is your personal finance assistant that helps you manag
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** Vite + React (Hosted on Vercel)
-- **Backend:** FastAPI / Flask (Hosted on Railway)
+- **Frontend:** Vite + React (Hosted on Render)
+- **Backend:** FastAPI / Flask (Hosted on Fly)
 - **Database:** MongoDB Atlas
 - **AI Integration:** Python Classification
 - **API Testing:** Postman
@@ -37,9 +37,8 @@ Welcome to Lumance! This is your personal finance assistant that helps you manag
 
 ## 🌐 Live Links:
 
-- **Frontend:** [vercel-link](https://your-project.vercel.app)
-- **Backend API:** [railway-link](https://your-api.up.railway.app)
-- **GitHub Repo:** [github-link](https://github.com/your/repo)
+- **Frontend:** [render-link](https://lumance.onrender.com)
+- **GitHub Repo:** [github-link](https://github.com/Lumance/Lumance)
 
 ---
 
