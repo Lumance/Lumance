@@ -7,7 +7,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { NAV_ITEMS, PROFILE_ITEMS } from '../utils/utils';
 import GradientText from '../assets/animations/GradientText';
 import GlareHover from '../assets/animations/GlareHover';
-import logo from '/vite.svg';
+import logo from '../assets/svg/vite.svg';
 
 const Navbar = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
