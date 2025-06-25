@@ -28,7 +28,7 @@ Welcome to Lumance! This is your personal finance assistant that helps you manag
 ## 🛠️ Tech Stack
 
 - **Frontend:** Vite + React (Hosted on Render)
-- **Backend:** FastAPI / Flask (Hosted on Fly)
+- **Backend:** FastAPI / Flask (Hosted on Render)
 - **Database:** MongoDB Atlas
 - **AI Integration:** Python Classification
 - **API Testing:** Postman
