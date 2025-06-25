@@ -43,7 +43,7 @@ const register = async (req, res) => {
             .cookie('token', token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'Strict',
+                sameSite: 'None',
                 maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
             })
             .status(201)
@@ -72,7 +72,7 @@ const login = async (req, res) => {
             .cookie('token', token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'Strict',
+                sameSite: 'None',
                 maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
             })
             .json({ success: true, user: { isOnboarded: user.isOnboarded } });
@@ -120,7 +120,7 @@ const handleGoogleAuth = async (req, res) => {
             .cookie('token', token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'Strict',
+                sameSite: 'None',
                 maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
             })
             .json({ success: true, user: { email, name, avatarUrl: picture, isOnboarded: user.isOnboarded } });
@@ -141,7 +141,7 @@ const logout = (_req, res) => {
             .clearCookie('token', {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'Strict',
+                sameSite: 'None',
             })
             .status(200).json({ success: true });
     } catch (error) {
