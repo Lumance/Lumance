@@ -7,6 +7,7 @@ app = 'lumance'
 primary_region = 'bom'
 
 [build]
+  dockerfile = 'Dockerfile'
 
 [http_service]
   internal_port = 5000
