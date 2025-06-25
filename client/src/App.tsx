@@ -17,7 +17,6 @@ import NotFound from './components/NotFound';
 
 import ProtectedRoute from './routes/ProtectedRoute';
 import PublicRoute from "./routes/PublicRoute";
-import { AuthProvider } from './contexts/AuthContext';
 
 const App = () => {
   const head = createHead();
@@ -48,13 +47,10 @@ const App = () => {
   return (
     <UnheadProvider head={head}>
       <LoadingProvider>
-        <AuthProvider>
-          <RouterProvider router={router} />
-        </AuthProvider>
+        <RouterProvider router={router} />
       </LoadingProvider>
     </UnheadProvider>
   );
-
 }
 
 export default App

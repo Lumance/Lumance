@@ -5,12 +5,6 @@ import Otp from '../models/RegistrationOtp.js'
 import { generateToken } from '../middlewares/authMiddleware.js';
 import { sendOtpToEmail, verifyOtp } from '../utils/utils.js';
 
-const client = new OAuth2Client(
-    process.env.GOOGLE_CLIENT_ID,
-    process.env.GOOGLE_CLIENT_SECRET,
-    'postmessage'
-);
-
 // Signup route - Creates a new user account with email/password
 const register = async (req, res) => {
     const { name, email, password, otp } = req.body;
@@ -43,7 +37,7 @@ const register = async (req, res) => {
             .cookie('token', token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'None',
+                sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Strict',
                 maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
             })
             .status(201)
@@ -72,7 +66,7 @@ const login = async (req, res) => {
             .cookie('token', token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'None',
+                sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Strict',
                 maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
             })
             .json({ success: true, user: { isOnboarded: user.isOnboarded } });
@@ -84,6 +78,12 @@ const login = async (req, res) => {
 
 const handleGoogleAuth = async (req, res) => {
     try {
+        const client = new OAuth2Client(
+            process.env.GOOGLE_CLIENT_ID,
+            process.env.GOOGLE_CLIENT_SECRET,
+            'postmessage'
+        );
+
         const { code } = req.body;
 
         const { tokens } = await client.getToken({
@@ -120,7 +120,7 @@ const handleGoogleAuth = async (req, res) => {
             .cookie('token', token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'None',
+                sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Strict',
                 maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
             })
             .json({ success: true, user: { email, name, avatarUrl: picture, isOnboarded: user.isOnboarded } });
@@ -141,11 +141,11 @@ const logout = (_req, res) => {
             .clearCookie('token', {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'None',
+                sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Strict',
             })
             .status(200).json({ success: true });
     } catch (error) {
-    res.status(500).json({ error: 'Logout failed' });
+        res.status(500).json({ error: 'Logout failed' });
     }
 };
 
