@@ -1,15 +1,23 @@
 import dotenv from 'dotenv';
+import path from 'path';
 import express from 'express';
 import passport from 'passport';
 import { Strategy } from 'passport-google-oauth20';
-import jwt from 'jsonwebtoken';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
 import Mongoose from './mongoose.js';
 import authRoutes from './routes/authRoutes.js';
 
-dotenv.config();
+dotenv.config({
+  path: path.resolve(
+    process.cwd(),
+    process.env.NODE_ENV === 'production'
+      ? '.env.production'
+      : '.env.development'
+  ),
+});
+
 const app = express();
 
 const mongoose = new Mongoose();
@@ -37,6 +45,6 @@ passport.use(new Strategy({
 
 app.use('/api/auth', authRoutes);
 
-app.listen(process.env.PORT, () => {
-    console.log(`Server is running on port ${process.env.PORT}`);
+app.listen((process.env.PORT || 5000), () => {
+    console.log(`Server is running on port ${process.env.PORT || 5000}`);
 });
