@@ -120,7 +120,7 @@ const LoginForm = () => {
                         setEmail(e.target.value)
                         setError('')
                     }}
-                    className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 shadow-input focus:outline-none focus:ring-2 focus:ring-mint focus:border-transparent transition duration-[1.5s] ease-out focus:ring-offset-0 text-white placeholder:text-white/70"
+                    className="w-full px-4 py-3 rounded-xl font-poppins font-light bg-white/10 border border-white/20 shadow-input focus:outline-none focus:ring-2 focus:ring-mint focus:border-transparent transition duration-[1.5s] ease-out focus:ring-offset-0 text-white placeholder:text-white/70"
                     placeholder="you@example.com"
                     required
                     disabled={isLoading}
@@ -140,7 +140,7 @@ const LoginForm = () => {
                             setPassword(e.target.value)
                             setError('')
                         }}
-                        className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 shadow-input focus:outline-none focus:ring-2 focus:ring-mint focus:border-transparent transition duration-[1.5s] ease-out focus:ring-offset-0 text-white placeholder:text-white/70"
+                        className="w-full px-4 py-3 rounded-xl font-poppins font-light tracking-wider bg-white/10 border border-white/20 shadow-input focus:outline-none focus:ring-2 focus:ring-mint focus:border-transparent transition duration-[1.5s] ease-out focus:ring-offset-0 text-white placeholder:text-white/70"
                         placeholder="••••••••"
                         required
                         minLength={8}
@@ -150,7 +150,7 @@ const LoginForm = () => {
                     />
                     <button
                         type="button"
-                        className="absolute inset-y-0 right-0 pr-4 flex items-center cursor-pointer"
+                        className="absolute inset-y-0 right-0 px-4 rounded-xl flex items-center cursor-pointer"
                         onClick={() => setShowPassword(!showPassword)}
                         aria-label={showPassword ? 'Hide password' : 'Show password'}
                     >
@@ -164,7 +164,7 @@ const LoginForm = () => {
             </div>
 
             <div className="pt-2">
-                <Button type="submit" fullWidth disabled={isLoading} className='hover:shadow-[0_4px_12px_rgba(0,0,0,0.3)] transition-shadow duration-200 ease-in-out cursor-pointer'>
+                <Button type="submit" fullWidth disabled={isLoading} className='hover:shadow-[0_4px_12px_rgba(0,0,0,0.3)] transition-shadow duration-300 ease-in-out cursor-pointer'>
                     {isLoading ? 'Logging in...' : 'Log In'} {/* Add loading spinner here if needed with smooth css */}
                 </Button>
             </div>
@@ -178,18 +178,18 @@ const LoginForm = () => {
             <Button type="button" variant="google" fullWidth onClick={() => {
                 setError('');
                 handleGoogleLogin()
-            }} disabled={isLoading} className='cursor-pointer'>
+            }} disabled={isLoading} className='cursor-pointer duration-300'>
                 <Google />
                 {isLoading ? 'Signing in...' : 'Continue with Google'}
             </Button>
 
-            <div className="text-center space-y-4">
-                <Link to="/forgot-password" className="text-sm text-white/80 hover:text-white hover:drop-shadow-[0_0_4px_rgba(255,255,255,0.5)] transition-all">
+            <div className="text-center space-y-4 font-satoshi">
+                <Link to="/forgot-password" className="font-semibold text-white/80 duration-300 hover:text-white hover:drop-shadow-[0_0_4px_rgba(255,255,255,0.5)] transition-all">
                     Forgot your password?
                 </Link>
-                <div className="text-sm text-white/80">
+                <div className="text-sm text-white/80 font-poppins font-light">
                     Don't have an account?{' '}
-                    <Link to="/register" className="font-medium text-white hover:text-navy hover:drop-shadow-[0_0_4px_rgba(255,255,255,0.5)] transition-colors duration-200 ease-in-out">
+                    <Link to="/register" className="font-medium text-white hover:text-navy hover:drop-shadow-[0_0_4px_rgba(255,255,255,0.5)] transition-all duration-300 ease-in-out">
                         Sign up
                     </Link>
                 </div>
