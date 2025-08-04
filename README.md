@@ -47,7 +47,6 @@ Welcome to Lumance! This is your personal finance assistant that helps you manag
 - **Shivansh Dubey**       | ShivanshDubeyONG
 - **Saumil Agarwal**       | HappyMeal-git
 - **Abhishek Ghosh**       | FirezTheGreat
-- **Suryansh Singh**       |  
 
 ---
 
